@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アイデアカードジェネレーター</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f7f9;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .card-display {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center; /* 中央寄せ */
+            word-break: keep-all; /* 単語の途中で改行しない */
+            white-space: nowrap; /* 強制的な改行を防ぐ */
+        }
+        #resultA {
+            background-color: #e0f7fa; /* ライトブルー */
+            color: #00796b;
+        }
+        #resultB {
+            background-color: #fff3e0; /* ライトオレンジ */
+            color: #ff8f00;
+        }
+        button {
+            /* ボタン幅を確保し、文字の折り返しを防ぐ */
+            background-color: #4CAF50; /* 緑 */
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 100%;
+            transition: background-color 0.3s;
+            word-break: keep-all; /* 単語の途中で改行しない */
+        }
+        button:active {
+            background-color: #388e3c;
+        }
+        .label {
+            font-size: 0.9em;
+            color: #777;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>💡 アイデアマス抽選</h1>
+    
+    <div class="label">ヤマ A (テーマ・課題)</div>
+    <div id="resultA" class="card-display"></div>
+    
+    <div class="label">ヤマ B (モノ・概念)</div>
+    <div id="resultB" class="card-display"></div>
+    
+    <button onclick="generateIdea()">カードを引く！</button>
+</div>
+
+<script>
+    // ヤマA: テーマ・課題・状況
+    const yama_A = [
+        "学校のルール", "友達との約束", "通学・通勤", "家族の健康",
+        "地元の歴史", "忘れ物", "やる気", "SNSの情報",
+        "部屋の片付け", "食事の時間", "動物の感情", "環境問題",
+        "災害", "睡眠", "遊び場", "お金",
+        "時間（タイパ）", "昔の習慣", "苦手なこと", "コミュニケーション"
+    ];
+
+    // ヤマB: モノ・概念・技術
+    const yama_B = [
+        "靴下", "声", "透明", "匂い",
+        "空", "鏡", "磁石", "振動",
+        "暗闇", "ロボット", "紙", "記号（マーク）",
+        "仮想（VR）", "写真", "色", "粘土",
+        "太陽", "地図", "音", "熱"
+    ];
+    
+    // **変更点①：スタート画面のテキストを定義**
+    const initialTextA = "テーマを引く";
+    const initialTextB = "モノを引く";
+
+
+    function generateIdea() {
+        // ヤマAからランダムに1つ選択
+        const random_A = yama_A[Math.floor(Math.random() * yama_A.length)];
+        
+        // ヤマBからランダムに1つ選択
+        const random_B = yama_B[Math.floor(Math.random() * yama_B.length)];
+
+        // 結果を画面に表示
+        document.getElementById('resultA').textContent = random_A;
+        document.getElementById('resultB').textContent = random_B;
+    }
+    
+    // **変更点②：初期表示関数を定義**
+    function initializeDisplay() {
+        document.getElementById('resultA').textContent = initialTextA;
+        document.getElementById('resultB').textContent = initialTextB;
+    }
+
+    // ページが完全に読み込まれたら初期表示を実行
+    window.onload = initializeDisplay;
+
+</script>
+
+</body>
+</html>
